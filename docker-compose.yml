@@ -1,0 +1,20 @@
+version: '2'
+services:
+  server:
+    build: .
+    cap_add:
+      - DAC_READ_SEARCH
+    image: unifi-video:latest
+    ports:
+      - "6666:6666/tcp"
+      - "7004:7004/udp"
+      - "7080:7080/tcp"
+      - "7443:7443/tcp"
+      - "7445:7445/tcp"
+      - "7446:7446/tcp"
+      - "7447:7447/tcp"
+    restart: unless-stopped
+    volumes:
+      - /data/docker/unifi-video/var:/var/lib/unifi-video
+      - /data/docker/unifi-video/log:/var/log/unifi-video
+      - /data/docker/unifi-video/mongodb:/var/lib/mongodb
